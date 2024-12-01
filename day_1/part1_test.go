@@ -13,6 +13,6 @@ func BenchmarkPart1(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		calculateDistance(left, right)
+		CalculateDistance(left, right)
 	}
 }
