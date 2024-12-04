@@ -21,20 +21,12 @@ func GetXMASCountX(grid []string) int {
 				continue
 			}
 
-			diagRight := string([]rune{
-				rune(grid[i-1][j-1]),
-				rune(middle),
-				rune(grid[i+1][j+1]),
-			})
+			diagRight := string([]byte{grid[i-1][j-1], middle, grid[i+1][j+1]})
 			if !(diagRight == MAS_STR) && !(diagRight == SAM_STR) {
 				continue
 			}
 
-			diagLeft := string([]rune{
-				rune(grid[i-1][j+1]),
-				rune(middle),
-				rune(grid[i+1][j-1]),
-			})
+			diagLeft := string([]byte{grid[i-1][j+1], middle, grid[i+1][j-1]})
 			if !(diagLeft == MAS_STR) && !(diagLeft == SAM_STR) {
 				continue
 			}
