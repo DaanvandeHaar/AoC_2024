@@ -2,14 +2,13 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 )
 
-func main() {
-	fmt.Println(Part2())
-}
+//func main() {
+//	fmt.Println(Part1())
+//}
 
-func Part2() int {
+func Part1() int {
 	grid := ReadFile()
 
 	return GetXMASCount(grid)
@@ -29,30 +28,35 @@ func GetXMASCount(grid [][]byte) int {
 			safeRight := j+3 < rowLen
 			safeLeft := j-3 >= 0
 
+			start := grid[i][j]
+			if start != 'X' && start != 'S' {
+				continue
+			}
+
 			if safeDown {
-				down := []byte{grid[i][j], grid[i+1][j], grid[i+2][j], grid[i+3][j]}
-				if bytes.Equal(bytes.ToUpper(down), XMAS_BYTES) || bytes.Equal(bytes.ToUpper(down), SAMX_BYTES) {
+				down := []byte{start, grid[i+1][j], grid[i+2][j], grid[i+3][j]}
+				if bytes.Equal(down, XMAS_BYTES) || bytes.Equal(down, SAMX_BYTES) {
 					count++
 				}
 			}
 
 			if safeRight {
 				side := grid[i][j : j+4]
-				if bytes.Equal(bytes.ToUpper(side), XMAS_BYTES) || bytes.Equal(bytes.ToUpper(side), SAMX_BYTES) {
+				if bytes.Equal(side, XMAS_BYTES) || bytes.Equal(side, SAMX_BYTES) {
 					count++
 				}
 			}
 
 			if safeDown && safeRight {
-				diag := []byte{grid[i][j], grid[i+1][j+1], grid[i+2][j+2], grid[i+3][j+3]}
-				if bytes.Equal(bytes.ToUpper(diag), XMAS_BYTES) || bytes.Equal(bytes.ToUpper(diag), SAMX_BYTES) {
+				diagRight := []byte{start, grid[i+1][j+1], grid[i+2][j+2], grid[i+3][j+3]}
+				if bytes.Equal(diagRight, XMAS_BYTES) || bytes.Equal(diagRight, SAMX_BYTES) {
 					count++
 				}
 			}
 
 			if safeDown && safeLeft {
-				diag := []byte{grid[i][j], grid[i+1][j-1], grid[i+2][j-2], grid[i+3][j-3]}
-				if bytes.Equal(bytes.ToUpper(diag), XMAS_BYTES) || bytes.Equal(bytes.ToUpper(diag), SAMX_BYTES) {
+				diagLeft := []byte{start, grid[i+1][j-1], grid[i+2][j-2], grid[i+3][j-3]}
+				if bytes.Equal(diagLeft, XMAS_BYTES) || bytes.Equal(diagLeft, SAMX_BYTES) {
 					count++
 				}
 			}
