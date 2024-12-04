@@ -13,33 +13,33 @@ func GetXMASCountX(grid []string) int {
 
 	gridLen := len(grid)
 	rowLen := len(grid[1])
-	for i := range grid {
-		safeDown := i+2 < gridLen
+	for i := 1; i+1 < gridLen; i++ {
+		for j := 1; j+1 < rowLen; j++ {
+			middle := grid[i][j]
 
-		for j := 0; j < rowLen; j++ {
-			safeRight := j+2 < rowLen
-
-			if safeRight && safeDown {
-				diagRight := string([]rune{
-					rune(grid[i][j]),
-					rune(grid[i+1][j+1]),
-					rune(grid[i+2][j+2]),
-				})
-				if !(diagRight == MAS_STR) && !(diagRight == SAM_STR) {
-					continue
-				}
-
-				diagLeft := string([]rune{
-					rune(grid[i+2][j]),
-					rune(grid[i+1][j+1]),
-					rune(grid[i][j+2]),
-				})
-				if !(diagLeft == MAS_STR) && !(diagLeft == SAM_STR) {
-					continue
-				}
-
-				count++
+			if middle != 'A' {
+				continue
 			}
+
+			diagRight := string([]rune{
+				rune(grid[i-1][j-1]),
+				rune(middle),
+				rune(grid[i+1][j+1]),
+			})
+			if !(diagRight == MAS_STR) && !(diagRight == SAM_STR) {
+				continue
+			}
+
+			diagLeft := string([]rune{
+				rune(grid[i-1][j+1]),
+				rune(middle),
+				rune(grid[i+1][j-1]),
+			})
+			if !(diagLeft == MAS_STR) && !(diagLeft == SAM_STR) {
+				continue
+			}
+
+			count++
 		}
 	}
 
