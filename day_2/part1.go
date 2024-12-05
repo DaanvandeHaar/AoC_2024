@@ -1,5 +1,7 @@
 package main
 
+import "AoC_2024/pkg"
+
 func Part1() int {
 	reports := ReadFile()
 
@@ -14,7 +16,7 @@ func CalculateSafeReportsPart1(reports [][]int) int {
 
 		for j := 1; j < len(report); j++ {
 			lastSeen, current := report[j-1], report[j]
-			if Abs(lastSeen-current) > 3 || lastSeen == current {
+			if pkg.Abs(lastSeen-current) > 3 || lastSeen == current {
 				isSafe = false
 				break
 			}

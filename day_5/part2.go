@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AoC_2024/pkg"
 	"slices"
 )
 
@@ -20,7 +21,7 @@ func Part2() int {
 					return 0
 				}
 
-				if Contains(b, mustAfter) {
+				if pkg.Contains(b, mustAfter) {
 					return -1
 				}
 
@@ -49,7 +50,7 @@ func GetRejectedUpdates(rulesMap map[int][]int, updates [][]int) [][]int {
 				seen = append(seen, pageNumber)
 				continue
 			}
-			if ContainsAny(seen, mustAfter) {
+			if pkg.ContainsAny(seen, mustAfter) {
 				hasError = true
 				break
 			}

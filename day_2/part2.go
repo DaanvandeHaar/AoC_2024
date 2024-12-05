@@ -1,6 +1,9 @@
 package main
 
-import "sync"
+import (
+	"AoC_2024/pkg"
+	"sync"
+)
 
 func isReportSafe(report []int) bool {
 	isIncreasing := report[0] < report[1]
@@ -15,7 +18,7 @@ func isReportSafe(report []int) bool {
 			return false
 		}
 
-		if Abs(lastSeen-current) > 3 || lastSeen == current {
+		if pkg.Abs(lastSeen-current) > 3 || lastSeen == current {
 			return false
 		}
 	}

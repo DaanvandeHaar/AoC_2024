@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AoC_2024/pkg"
 	"bufio"
 	"bytes"
 	"os"
@@ -13,15 +14,8 @@ func ReadFile() ([]int, []int) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		split := bytes.Split(scanner.Bytes(), []byte("   "))
-		left, right = append(left, Must(strconv.Atoi(string(split[0])))), append(right, Must(strconv.Atoi(string(split[1]))))
+		left, right = append(left, pkg.Must(strconv.Atoi(string(split[0])))), append(right, pkg.Must(strconv.Atoi(string(split[1]))))
 	}
 
 	return left, right
-}
-
-func Must[T any](obj T, err error) T {
-	if err != nil {
-		panic(err)
-	}
-	return obj
 }

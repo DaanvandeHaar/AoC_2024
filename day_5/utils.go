@@ -1,6 +1,7 @@
 package main
 
 import (
+	"AoC_2024/pkg"
 	"log"
 	"os"
 	"strconv"
@@ -25,7 +26,7 @@ func ReadFile() ([][2]int, [][]int) {
 	part1 := strings.Split(parts[0], "\r\n")
 	for _, line := range part1 {
 		ruleSet := strings.Split(line, "|")
-		rules = append(rules, [2]int{Must(strconv.Atoi(ruleSet[0])), Must(strconv.Atoi(ruleSet[1]))})
+		rules = append(rules, [2]int{pkg.Must(strconv.Atoi(ruleSet[0])), pkg.Must(strconv.Atoi(ruleSet[1]))})
 	}
 
 	part2 := strings.Split(parts[1], "\r\n")
@@ -34,7 +35,7 @@ func ReadFile() ([][2]int, [][]int) {
 
 		var page []int
 		for _, n := range pageSet {
-			page = append(page, Must(strconv.Atoi(n)))
+			page = append(page, pkg.Must(strconv.Atoi(n)))
 		}
 		pages = append(pages, page)
 	}
@@ -63,7 +64,7 @@ func GetAllowedUpdatesMiddle(rulesMap map[int][]int, updates [][]int) []int {
 				seen = append(seen, pageNumber)
 				continue
 			}
-			if ContainsAny(seen, mustAfter) {
+			if pkg.ContainsAny(seen, mustAfter) {
 				hasError = true
 				break
 			}
@@ -79,37 +80,4 @@ func GetAllowedUpdatesMiddle(rulesMap map[int][]int, updates [][]int) []int {
 
 func GetMiddle(update []int) int {
 	return update[len(update)/2]
-}
-
-func Must[T any](obj T, err error) T {
-	if err != nil {
-		panic(err)
-	}
-	return obj
-}
-
-func Contains[T comparable](comparable T, array []T) bool {
-	for _, item := range array {
-		if item == comparable {
-			return true
-		}
-	}
-
-	return false
-}
-
-func ContainsAny[T comparable](set []T, contains []T) bool {
-	lookup := make(map[T]struct{})
-
-	for _, item := range set {
-		lookup[item] = struct{}{}
-	}
-
-	for _, item := range contains {
-		if _, exists := lookup[item]; exists {
-			return true
-		}
-	}
-
-	return false
 }
